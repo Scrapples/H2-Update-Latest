@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spare Snacks | H1 FY2026 Investor Update</title>
+  <!-- GitHub Pages: served as index.html -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F9F7F2;
+    --ink: #1A1A18;
+    --cream: #F2EDE3;
+    --teal: #1E7B6B;
+    --teal-light: #D4EDE8;
+    --teal-mid: #3DAB92;
+    --gold: #C8943A;
+    --gold-light: #F5EAD5;
+    --red: #C0392B;
+    --red-light: #FAE8E6;
+    --border: #DDD8CC;
+    --muted: #7A756A;
+    --card: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ────────────────────────────────────────────── */
+  header {
+    background: var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #333;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--teal-mid); }
+  .tagline {
+    font-size: 0.75rem;
+    color: #888;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  nav { display: flex; gap: 2px; }
+  nav a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.08); }
+  nav a.active { color: var(--teal-mid); }
+
+  /* ── HERO ──────────────────────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 72px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(30,123,107,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    margin-bottom: 16px;
+    display: inline-block;
+    border: 1px solid rgba(61,171,146,0.4);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--teal-mid); font-style: normal; }
+  .hero p {
+    font-size: 1.05rem;
+    color: #AAA;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .hero-stat {
+    flex: 1;
+    min-width: 140px;
+    padding: 20px 16px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+    line-height: 1.1;
+  }
+  .hero-stat-val.pos { color: var(--teal-mid); }
+  .hero-stat-val.neg { color: #FF8A7A; }
+  .hero-stat-lbl {
+    font-size: 0.72rem;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── LAYOUT ────────────────────────────────────────────── */
+  .page { display: none; }
+  .page.active { display: block; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .section-header p { color: var(--muted); max-width: 600px; font-weight: 300; font-size: 1rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ── CARDS ─────────────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .card-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  /* ── KPI GRID ───────────────────────────────────────────── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--teal);
+    border-radius: 12px 12px 0 0;
+  }
+  .kpi.warn::after { background: var(--gold); }
+  .kpi.bad::after { background: var(--red); }
+  .kpi.great::after { background: var(--teal-mid); }
+  .kpi-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .kpi-value { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .kpi-value.pos { color: var(--teal); }
+  .kpi-value.neg { color: var(--red); }
+  .kpi-value.gold { color: var(--gold); }
+  .kpi-change { font-size: 0.75rem; color: var(--muted); }
+  .kpi-change b { color: var(--teal); }
+  .kpi-change b.neg { color: var(--red); }
+
+  /* ── GRID LAYOUTS ───────────────────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+  .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+  @media (max-width: 800px) {
+    .grid-2, .grid-3, .grid-2-1, .grid-1-2 { grid-template-columns: 1fr; }
+    nav a { font-size: 0.68rem; padding: 8px 8px; }
+    .tagline { display: none; }
+  }
+  .span-2 { grid-column: span 2; }
+  @media (max-width: 800px) { .span-2 { grid-column: span 1; } }
+
+  /* ── CHART ──────────────────────────────────────────────── */
+  .chart-wrap { position: relative; height: 260px; }
+  .chart-wrap.tall { height: 320px; }
+
+  /* ── TABLE ──────────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: var(--cream); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr.highlight td { background: var(--teal-light); font-weight: 600; color: var(--teal); }
+  tr.total td { background: var(--cream); font-weight: 700; border-top: 2px solid var(--border); }
+  .td-pos { color: var(--teal); font-weight: 600; }
+  .td-neg { color: var(--red); font-weight: 600; }
+  .td-right { text-align: right; }
+  .td-center { text-align: center; }
+
+  /* ── BADGES ─────────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .badge-green { background: var(--teal-light); color: var(--teal); }
+  .badge-gold { background: var(--gold-light); color: var(--gold); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-grey { background: var(--cream); color: var(--muted); }
+
+  /* ── PIPELINE CARDS ─────────────────────────────────────── */
+  .pipeline-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .pipeline-item:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .pipeline-head {
+    padding: 20px 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .pipeline-head h4 { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .pipeline-head .cat { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .pipeline-toggle { font-size: 1.2rem; color: var(--muted); transition: transform 0.3s; flex-shrink: 0; margin-top: 2px; }
+  .pipeline-item.open .pipeline-toggle { transform: rotate(45deg); }
+  .pipeline-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-top: 0px solid var(--border);
+  }
+  .pipeline-item.open .pipeline-body {
+    max-height: 300px;
+    border-top-width: 1px;
+  }
+  .pipeline-body p { padding: 16px 22px; font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── HIGHLIGHT BOX ──────────────────────────────────────── */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--teal) 0%, #155f52 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .highlight-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 12px; }
+  .highlight-box p { opacity: 0.85; font-weight: 300; line-height: 1.7; margin-bottom: 8px; }
+  .highlight-box ul { list-style: none; padding: 0; margin-top: 12px; }
+  .highlight-box ul li { padding: 5px 0; opacity: 0.9; font-size: 0.9rem; }
+  .highlight-box ul li::before { content: '→ '; opacity: 0.6; }
+
+  .warn-box {
+    background: var(--gold-light);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .warn-box strong { color: var(--gold); }
+
+  /* ── PROGRESS BAR ───────────────────────────────────────── */
+  .progress-row { margin-bottom: 16px; }
+  .progress-meta { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem; }
+  .progress-meta span:first-child { font-weight: 600; }
+  .progress-meta span:last-child { color: var(--muted); font-family: 'DM Mono', monospace; }
+  .progress-bar { height: 7px; background: var(--cream); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 10px; background: var(--teal); transition: width 1s ease; }
+  .progress-fill.gold { background: var(--gold); }
+  .progress-fill.red { background: var(--red); }
+
+  /* ── DIVIDER ────────────────────────────────────────────── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  /* ── STRATEGY PILLARS ───────────────────────────────────── */
+  .pillar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--cream);
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .pillar h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; color: var(--ink); }
+  .pillar p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .pillar-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+
+  /* ── FOOTER ─────────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: #666;
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.78rem;
+    margin-top: 40px;
+  }
+  footer a { color: var(--teal-mid); text-decoration: none; }
+
+  /* ── ANIMATIONS ─────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease forwards; }
+  .fade-up:nth-child(2) { animation-delay: 0.07s; }
+  .fade-up:nth-child(3) { animation-delay: 0.14s; }
+  .fade-up:nth-child(4) { animation-delay: 0.21s; }
+  .fade-up:nth-child(5) { animation-delay: 0.28s; }
+
+  /* ── TESCO SECTION ──────────────────────────────────────── */
+  .tesco-banner {
+    background: linear-gradient(135deg, #00539F 0%, #003d78 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+  .tesco-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; }
+  .tesco-banner p { opacity: 0.8; max-width: 600px; font-weight: 300; }
+  .tesco-stats { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+  .tesco-stat { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px 20px; text-align: center; min-width: 120px; }
+  .tesco-stat-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; display: block; }
+  .tesco-stat-lbl { font-size: 0.7rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Tab buttons */
+  .tab-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Spare <span>Snacks</span></div>
+    <span class="tagline">H1 FY2026 · Investor Update · Confidential</span>
+    <nav>
+      <a class="active" data-page="highlights">Highlights</a>
+      <a data-page="financial">Financials</a>
+      <a data-page="growth">Growth</a>
+      <a data-page="tesco">Tesco</a>
+      <a data-page="pipeline">Pipeline</a>
+      <a data-page="strategy">Strategy</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO (always visible) -->
+<div class="hero">
+  <span class="hero-label">H1 FY2026 · Oct 2025 – Mar 2026</span>
+  <h1>Turning Momentum<br>into <em>Scale</em></h1>
+  <p>Revenue surged 77% half-on-half as Grocery listings delivered, losses narrowed by 69%, and the business crossed £100k gross profit for the first time.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-val pos">£329k</span>
+      <span class="hero-stat-lbl">Total Revenue</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val pos">+77%</span>
+      <span class="hero-stat-lbl">Revenue Growth</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val pos">£101k</span>
+      <span class="hero-stat-lbl">Gross Profit</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val pos">30.7%</span>
+      <span class="hero-stat-lbl">GP Margin</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val neg">-£10.8k</span>
+      <span class="hero-stat-lbl">Operating Loss</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 0: HIGHLIGHTS
+═══════════════════════════════════════════════════════════ -->
+<div id="highlights" class="page active">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">00 · Highlights</span>
+      <h2>H1 FY2026 — What Happened</h2>
+      <p>Three headline moments define this half: a transformational retail partnership delivering, a breakout international win, and the market validating our product.</p>
+    </div>
+
+    <!-- Top KPI strip -->
+    <div class="kpi-grid" style="margin-bottom:28px;">
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Revenue Growth</div>
+        <div class="kpi-value pos">+77%</div>
+        <div class="kpi-change">£185k <b>→ £329k</b> half-on-half</div>
+      </div>
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Tesco ROS (Jan–Mar 26)</div>
+        <div class="kpi-value pos">6.2</div>
+        <div class="kpi-change">vs category avg of <b>4.0</b></div>
+      </div>
+      <div class="kpi fade-up">
+        <div class="kpi-label">Ocado — Apple Crisp Searches</div>
+        <div class="kpi-value gold">+27%</div>
+        <div class="kpi-change">Healthy kids snacks up <b>+30%</b></div>
+      </div>
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Loss Reduction</div>
+        <div class="kpi-value pos">69%</div>
+        <div class="kpi-change">Op. loss: <b>£35k → £11k</b></div>
+      </div>
+      <div class="kpi great fade-up">
+        <div class="kpi-label">GLL Leisure Centres</div>
+        <div class="kpi-value pos">65</div>
+        <div class="kpi-change">UK-wide across cafes, vending &amp; party bags</div>
+      </div>
+    </div>
+
+    <!-- Highlight 1: GLL Better -->
+    <div style="background:linear-gradient(135deg,#0E4D3A 0%,#1E7B6B 100%);border-radius:14px;padding:32px;color:#fff;margin-bottom:20px;" class="fade-up">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+        <div style="flex:1;min-width:260px;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;">New Win · Leisure &amp; Active Lifestyle</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;line-height:1.15;margin-bottom:14px;">Launch into 65<br><em style="color:#7FD4C1;font-style:normal;">GLL Better</em> Leisure Centres</h3>
+          <p style="opacity:0.85;font-weight:300;line-height:1.75;font-size:0.95rem;margin-bottom:20px;">Scrapples will be available across GLL Better leisure centres nationwide — in cafes, vending machines, and party bags. GLL is the UK's largest charitable leisure operator, running 350+ facilities. This is a major new distribution channel that puts Scrapples directly in front of active, health-conscious families.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 18px;text-align:center;min-width:90px;">
+              <div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">65</div>
+              <div style="font-size:0.68rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Leisure Centres</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 18px;text-align:center;min-width:90px;">
+              <div style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;">3</div>
+              <div style="font-size:0.68rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Touchpoints</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 18px;text-align:center;flex:1;min-width:140px;">
+              <div style="font-size:0.82rem;font-weight:600;line-height:1.5;">Cafes · Vending Machines · Party Bags</div>
+              <div style="font-size:0.68rem;opacity:0.65;margin-top:2px;">Distribution formats</div>
+            </div>
+          </div>
+        </div>
+        <!-- Icon graphic -->
+        <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:12px;">
+          <div style="width:110px;height:110px;background:rgba(255,255,255,0.1);border-radius:50%;border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:3.2rem;">🏊</div>
+          <svg viewBox="0 0 110 40" width="110" xmlns="http://www.w3.org/2000/svg">
+            <text x="55" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.5)" font-weight="600" letter-spacing="2">POWERED BY</text>
+            <rect x="10" y="20" width="90" height="16" rx="3" fill="rgba(255,255,255,0.12)"/>
+            <text x="55" y="32" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#fff" font-weight="700" letter-spacing="1">GLL BETTER</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Highlight 2: Sales + Tesco + Ocado row -->
+    <div class="grid-3" style="margin-bottom:20px;">
+
+      <!-- Revenue growth -->
+      <div class="card fade-up">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;background:var(--teal-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">📈</div>
+          <div class="card-title" style="margin:0;">Revenue Growth</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--teal);line-height:1;margin-bottom:6px;">+77%</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:14px;">Total revenue: £185k to £329k</div>
+        <hr>
+        <div style="margin-top:12px;">
+          <div style="font-size:0.82rem;font-weight:600;margin-bottom:6px;">Grocery up 152%</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">£99k to £250k — now 76% of revenue</div>
+        </div>
+        <div style="margin-top:10px;">
+          <div style="font-size:0.82rem;font-weight:600;margin-bottom:6px;">Export up 150%</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:99%"></div></div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">£6.6k to £16.5k</div>
+        </div>
+      </div>
+
+      <!-- Tesco ROS -->
+      <div class="card fade-up">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;background:#EEF4FF;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🏪</div>
+          <div class="card-title" style="margin:0;">Tesco Sales Velocity</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#2962B8;line-height:1;margin-bottom:6px;">6.2 ROS</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:14px;">Jan–Mar 2026 — 55% above category avg</div>
+        <hr>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted);">Category Avg</span><span style="font-weight:700;font-family:'DM Mono',monospace;">4.0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted);">Prev 13 Weeks</span><span style="font-weight:700;font-family:'DM Mono',monospace;color:var(--teal);">4.3</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted);">Last 13 Weeks</span><span style="font-weight:700;font-family:'DM Mono',monospace;color:var(--teal);">5.1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;background:var(--teal-light);padding:6px 8px;border-radius:6px;">
+            <span style="font-weight:700;">Jan–Mar 2026</span><span style="font-weight:700;font-family:'DM Mono',monospace;color:var(--teal);">6.2 ↑</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--muted);">Top 10 stores avg <strong>10+ ROS</strong></div>
+        </div>
+      </div>
+
+      <!-- Ocado trend -->
+      <div class="card fade-up">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;background:var(--gold-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🔍</div>
+          <div class="card-title" style="margin:0;">Ocado Trend Report</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px;">One to Watch</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:14px;">Natural Snacking 2026 — called out by Ocado</div>
+        <hr>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--gold-light);border-radius:8px;padding:12px 14px;">
+            <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);margin-bottom:4px;">Healthy Kids Snacks</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);">+30%</div>
+              <div style="font-size:0.78rem;color:var(--muted);">search growth on Ocado</div>
+            </div>
+          </div>
+          <div style="background:var(--teal-light);border-radius:8px;padding:12px 14px;">
+            <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal);margin-bottom:4px;">Apple Crisps Specifically</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--teal);">+27%</div>
+              <div style="font-size:0.78rem;color:var(--muted);">search growth — our top SKU</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary callout -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:28px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;" class="fade-up">
+      <div style="flex:0 0 auto;font-size:3rem;">🏆</div>
+      <div style="flex:1;min-width:240px;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:8px;">The Business is Working</div>
+        <p style="font-size:0.9rem;color:var(--muted);line-height:1.75;">Revenue has nearly doubled, Tesco sales are accelerating above the category average, the Ocado Trend Report has called Spare Snacks out as the brand to watch for Natural Snacking 2026, and a major new 65-centre leisure channel has been secured. The operating loss has narrowed 69% to £10,818 — the business is approaching breakeven with real momentum behind it.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+        <div style="background:var(--teal);color:#fff;padding:10px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;text-align:center;">+77% Revenue</div>
+        <div style="background:#2962B8;color:#fff;padding:10px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;text-align:center;">Tesco ROS 6.2</div>
+        <div style="background:var(--gold);color:#fff;padding:10px 18px;border-radius:8px;font-size:0.82rem;font-weight:700;text-align:center;">Ocado #1 to Watch</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1: FINANCIAL DASHBOARD
+═══════════════════════════════════════════════════════════ -->
+<div id="financial" class="page">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">01 · Financial Dashboard</span>
+      <h2>H1 FY2026 Performance</h2>
+      <p>A transformational half-year. Revenue nearly doubled, gross profit broke £100k, and operating losses narrowed to their lowest point in the company's history.</p>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="kpi-grid">
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Total Revenue</div>
+        <div class="kpi-value pos">£329k</div>
+        <div class="kpi-change"><b>+77.4%</b> vs H2 (£186k)</div>
+      </div>
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Gross Profit</div>
+        <div class="kpi-value pos">£101k</div>
+        <div class="kpi-change"><b>+70.1%</b> vs H2 (£59k)</div>
+      </div>
+      <div class="kpi fade-up">
+        <div class="kpi-label">GP Margin</div>
+        <div class="kpi-value gold">30.7%</div>
+        <div class="kpi-change">vs <b>32.0%</b> in H2 (scaling effect)</div>
+      </div>
+      <div class="kpi great fade-up">
+        <div class="kpi-label">Operating Loss</div>
+        <div class="kpi-value" style="color:var(--red)">-£10.8k</div>
+        <div class="kpi-change"><b>69% reduction</b> vs H2 (-£35k)</div>
+      </div>
+      <div class="kpi fade-up">
+        <div class="kpi-label">Admin Costs / Revenue</div>
+        <div class="kpi-value pos">33.9%</div>
+        <div class="kpi-change">vs <b>50.9%</b> in H2 — improved leverage</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card fade-up">
+        <div class="card-title">Revenue & Gross Profit — H2 vs H1</div>
+        <div class="chart-wrap">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+      <div class="card fade-up">
+        <div class="card-title">P&L Waterfall — H1 FY2026</div>
+        <div class="chart-wrap">
+          <canvas id="waterfallChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- P&L Summary Table -->
+    <div class="card fade-up" style="margin-bottom:20px;">
+      <div class="card-title" style="margin-bottom:16px;">P&L Summary — H2 vs H1 Comparison</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Line Item</th>
+              <th class="td-right">H2 Apr–Sep 25</th>
+              <th class="td-right">H1 Oct 25–Mar 26</th>
+              <th class="td-right">Change £</th>
+              <th class="td-right">Change %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Total Turnover</td><td class="td-right">£185,519</td><td class="td-right">£329,190</td><td class="td-right td-pos">+£143,671</td><td class="td-right td-pos">+77.4%</td></tr>
+            <tr><td>Total Cost of Sales</td><td class="td-right">£126,189</td><td class="td-right">£228,275</td><td class="td-right td-neg">-£102,086</td><td class="td-right">+80.9%</td></tr>
+            <tr class="total"><td>Gross Profit</td><td class="td-right">£59,330</td><td class="td-right">£100,916</td><td class="td-right td-pos">+£41,586</td><td class="td-right td-pos">+70.1%</td></tr>
+            <tr><td>GP Margin</td><td class="td-right">32.0%</td><td class="td-right">30.7%</td><td class="td-right td-neg">-1.3pp</td><td class="td-right">—</td></tr>
+            <tr><td>Total Admin Costs</td><td class="td-right">£94,517</td><td class="td-right">£111,734</td><td class="td-right td-neg">-£17,217</td><td class="td-right">+18.2%</td></tr>
+            <tr class="total"><td>Operating Loss</td><td class="td-right td-neg">(£35,187)</td><td class="td-right td-neg">(£10,818)</td><td class="td-right td-pos">+£24,369</td><td class="td-right td-pos">69% better</td></tr>
+            <tr><td>Other Income</td><td class="td-right">£1,214</td><td class="td-right">—</td><td class="td-right td-neg">-£1,214</td><td class="td-right">—</td></tr>
+            <tr class="total"><td>Net Loss After Tax</td><td class="td-right td-neg">(£33,974)</td><td class="td-right td-neg">(£10,818)</td><td class="td-right td-pos">+£23,156</td><td class="td-right td-pos">68% better</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Admin cost standouts -->
+    <div class="grid-2">
+      <div class="card fade-up">
+        <div class="card-title" style="margin-bottom:16px;">Key Admin Cost Movements</div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Ocado/Tesco/Brakes Advertising</span><span>+£23,619</span></div>
+          <div class="progress-bar"><div class="progress-fill gold" style="width:100%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Freelance Staff</span><span>-£7,433 ↓</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Cloud Computing</span><span>-£1,846 ↓</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>B2B Marketing Materials</span><span>+£1,031</span></div>
+          <div class="progress-bar"><div class="progress-fill gold" style="width:44%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Legal & Accountancy</span><span>-£880 ↓</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:69%"></div></div>
+        </div>
+      </div>
+      <div class="highlight-box fade-up">
+        <h3>The Key Takeaway</h3>
+        <p>The £23.6k invested in retailer co-op advertising (Ocado, Tesco, Brakes) generated £150.8k of incremental Grocery revenue — an implied <strong>6.4× return</strong>.</p>
+        <p>Admin costs grew 18% in absolute terms, but as a percentage of revenue improved dramatically from 50.9% → 33.9%, demonstrating real operating leverage as the business scales.</p>
+        <ul>
+          <li>Operating loss down 69% to £10,818</li>
+          <li>Approaching operating breakeven</li>
+          <li>Admin leverage improving each half</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2: GROWTH TRACKER
+═══════════════════════════════════════════════════════════ -->
+<div id="growth" class="page">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">02 · Growth Tracker</span>
+      <h2>Channel Revenue Analysis</h2>
+      <p>Grocery has become the dominant engine — now 75.9% of total revenue. Export tripled. DTC grew 37%. Food Service declined sharply and requires strategic attention.</p>
+    </div>
+
+    <!-- Channel Chart -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="tab-row" id="growthTabs">
+        <button class="tab-btn active" data-chart="channels">By Channel</button>
+        <button class="tab-btn" data-chart="mix">Revenue Mix</button>
+        <button class="tab-btn" data-chart="trend">Half-on-Half Trend</button>
+      </div>
+      <div class="chart-wrap tall">
+        <canvas id="channelChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Channel Table -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title" style="margin-bottom:16px;">Channel Breakdown — H2 vs H1</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th class="td-right">H2 Apr–Sep 25</th>
+              <th class="td-right">H1 Oct 25–Mar 26</th>
+              <th class="td-right">Change £</th>
+              <th class="td-right">Change %</th>
+              <th class="td-center">H1 Mix %</th>
+              <th class="td-center">Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight"><td>🏪 Grocery</td><td class="td-right">£99,060</td><td class="td-right">£249,889</td><td class="td-right td-pos">+£150,829</td><td class="td-right td-pos">+152%</td><td class="td-center">75.9%</td><td class="td-center">⬆</td></tr>
+            <tr><td>🌍 Export</td><td class="td-right">£6,576</td><td class="td-right">£16,464</td><td class="td-right td-pos">+£9,888</td><td class="td-right td-pos">+150%</td><td class="td-center">5.0%</td><td class="td-center td-pos">⬆</td></tr>
+            <tr><td>💻 DTC Online</td><td class="td-right">£9,451</td><td class="td-right">£12,924</td><td class="td-right td-pos">+£3,473</td><td class="td-right td-pos">+37%</td><td class="td-center">3.9%</td><td class="td-center td-pos">⬆</td></tr>
+            <tr><td>🤝 Independents</td><td class="td-right">£622</td><td class="td-right">£1,501</td><td class="td-right td-pos">+£879</td><td class="td-right td-pos">+141%</td><td class="td-center">0.5%</td><td class="td-center td-pos">⬆</td></tr>
+            <tr><td>📦 Amazon</td><td class="td-right">£21,563</td><td class="td-right">£20,100</td><td class="td-right td-neg">-£1,463</td><td class="td-right td-neg">-7%</td><td class="td-center">6.1%</td><td class="td-center td-neg">↓</td></tr>
+            <tr><td>🍽 Food Service</td><td class="td-right">£44,373</td><td class="td-right">£25,522</td><td class="td-right td-neg">-£18,851</td><td class="td-right td-neg">-43%</td><td class="td-center">7.8%</td><td class="td-center td-neg">↓↓</td></tr>
+            <tr><td>🏨 Hotels</td><td class="td-right">£2,304</td><td class="td-right">£1,620</td><td class="td-right td-neg">-£684</td><td class="td-right td-neg">-30%</td><td class="td-center">0.5%</td><td class="td-center td-neg">↓</td></tr>
+            <tr><td>🏬 OOH Wholesalers</td><td class="td-right">£1,728</td><td class="td-right">£797</td><td class="td-right td-neg">-£931</td><td class="td-right td-neg">-54%</td><td class="td-center">0.2%</td><td class="td-center td-neg">↓</td></tr>
+            <tr class="total"><td>Total</td><td class="td-right">£185,519</td><td class="td-right">£329,190</td><td class="td-right td-pos">+£143,671</td><td class="td-right td-pos">+77%</td><td class="td-center">100%</td><td class="td-center">⬆</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">🚀 Channels Accelerating</div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Grocery</span><span>+152% · £249,889</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Export</span><span>+150% · £16,464</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:99%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>Independents</span><span>+141% · £1,501</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:93%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-meta"><span>DTC Online</span><span>+37% · £12,924</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+        </div>
+      </div>
+      <div class="warn-box" style="display:flex;flex-direction:column;justify-content:center;">
+        <div style="margin-bottom:12px;"><strong style="font-size:1rem;">⚠ Food Service Decline Requires Attention</strong></div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:12px;">Food Service revenue fell from £44,373 to £25,522 — a decline of <strong style="color:var(--red)">£18,851 (-43%)</strong>. This is the largest absolute channel loss this period.</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">Action required: root-cause analysis (contract expiry vs seasonal) and a recovery plan to be presented at the next board meeting. Serco Healthcare opportunity in pipeline may partially offset.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 3: TESCO PERFORMANCE
+═══════════════════════════════════════════════════════════ -->
+<div id="tesco" class="page">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">03 · Tesco Performance</span>
+      <h2>Sales Velocity Growing Every Period</h2>
+      <p>Our core range is hitting the grocery category average of 4 ROS — and accelerating. Jan–Mar 2026 hit 6.2 ROS, with top stores delivering 10+.</p>
+    </div>
+
+    <!-- ROS KPI row -->
+    <div class="kpi-grid" style="margin-bottom:20px;">
+      <div class="kpi great">
+        <div class="kpi-label">Latest ROS (Jan–Mar 26)</div>
+        <div class="kpi-value pos">6.2</div>
+        <div class="kpi-change"><b>+55%</b> above category avg of 4.0</div>
+      </div>
+      <div class="kpi great">
+        <div class="kpi-label">Top 10 Stores ROS</div>
+        <div class="kpi-value pos">10+</div>
+        <div class="kpi-change"><b>2.5×</b> the grocery category average</div>
+      </div>
+      <div class="kpi great">
+        <div class="kpi-label">Top 100 Stores ROS</div>
+        <div class="kpi-value pos">6+</div>
+        <div class="kpi-change"><b>50%</b> above the category average</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Top SKU — Plain Apple</div>
+        <div class="kpi-value gold">5.7</div>
+        <div class="kpi-change">Best-performing individual SKU</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Stores</div>
+        <div class="kpi-value pos">350+</div>
+        <div class="kpi-change">Tesco Incubator Programme</div>
+      </div>
+    </div>
+
+    <div class="tesco-banner">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+        <div style="flex:1;min-width:240px;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6;margin-bottom:10px;">Tesco · Incubator Programme</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:10px;line-height:1.2;">A Strong Start — Core Range<br>Hitting Grocery Category Avg 4</h3>
+          <p style="opacity:0.8;font-weight:300;font-size:0.9rem;">ROS growing every 13-week period. Jan–Mar 2026 hit 6.2 — well above the 4.0 category benchmark and trending higher.</p>
+        </div>
+        <div style="flex:0 0 290px;background:rgba(255,255,255,0.12);border-radius:14px;padding:20px 22px;border:1px solid rgba(255,255,255,0.2);">
+          <div style="font-size:1.8rem;line-height:1;margin-bottom:6px;opacity:0.4;">"</div>
+          <p style="font-style:italic;font-size:0.86rem;line-height:1.7;opacity:0.95;margin-bottom:14px;">I must tell you, my eldest daughter Ivy is obsessed with your apple crisps. She easily goes through a box each week. It's great that she asks for these over a packet of crisps every time!</p>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">👩</div>
+            <div><div style="font-weight:700;font-size:0.8rem;">Rachel Hann</div><div style="font-size:0.7rem;opacity:0.65;">Tesco Head of Innovation</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROS Chart + Store tier cards -->
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:4px;">Rate of Sale (ROS) — Trending Up</div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:16px;">Units per store per week. Category avg = 4.0 &nbsp;·&nbsp; Scrapples is above and accelerating every period.</p>
+        <div class="chart-wrap tall"><canvas id="rosChart"></canvas></div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card-title">Performance by Store Tier</div>
+        <div style="background:linear-gradient(135deg,#1E3A5F,#2962B8);border-radius:10px;padding:18px 20px;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7;">Top 10 Stores</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;">10+ ROS</span>
+          </div>
+          <div style="height:5px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;"><div style="height:100%;width:100%;background:rgba(255,255,255,0.85);border-radius:4px;"></div></div>
+          <p style="font-size:0.74rem;opacity:0.65;margin-top:5px;">2.5× the grocery category average</p>
+        </div>
+        <div style="background:linear-gradient(135deg,#1E5A4A,#1E7B6B);border-radius:10px;padding:18px 20px;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7;">Top 100 Stores</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;">6+ ROS</span>
+          </div>
+          <div style="height:5px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;"><div style="height:100%;width:60%;background:rgba(255,255,255,0.85);border-radius:4px;"></div></div>
+          <p style="font-size:0.74rem;opacity:0.65;margin-top:5px;">50% above category average</p>
+        </div>
+        <div style="background:linear-gradient(135deg,#6B4A1E,#C8943A);border-radius:10px;padding:18px 20px;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7;">Top SKU · Plain Apple</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;">5.7 ROS</span>
+          </div>
+          <div style="height:5px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;"><div style="height:100%;width:57%;background:rgba(255,255,255,0.85);border-radius:4px;"></div></div>
+          <p style="font-size:0.74rem;opacity:0.65;margin-top:5px;">Best-performing individual SKU in range</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG benchmark visual + metrics table -->
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;">
+        <div class="card-title" style="margin-bottom:16px;align-self:flex-start;">ROS vs Grocery Category Benchmark</div>
+        <svg viewBox="0 0 340 210" style="width:100%;max-width:340px;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8943A"/><stop offset="100%" stop-color="#1E7B6B"/></linearGradient>
+          </defs>
+          <!-- grid lines -->
+          <line x1="16" y1="44" x2="330" y2="44" stroke="#EEE8DC" stroke-width="1"/>
+          <line x1="16" y1="84" x2="330" y2="84" stroke="#EEE8DC" stroke-width="1"/>
+          <line x1="16" y1="124" x2="330" y2="124" stroke="#EEE8DC" stroke-width="1"/>
+          <line x1="16" y1="164" x2="330" y2="164" stroke="#EEE8DC" stroke-width="1"/>
+          <!-- category avg dotted line at y=124 (=4.0) -->
+          <line x1="16" y1="124" x2="330" y2="124" stroke="#7A756A" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <text x="332" y="128" font-family="DM Sans" font-size="10" fill="#7A756A">avg 4</text>
+          <!-- bars: each 10 units height per ROS unit, baseline y=164 -->
+          <!-- Category avg bar -->
+          <rect x="24" y="124" width="44" height="40" rx="5" fill="#DDD8CC"/>
+          <text x="46" y="188" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#7A756A">Category</text>
+          <text x="46" y="120" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#7A756A">4.0</text>
+          <!-- Prev 13wks -->
+          <rect x="90" y="121" width="44" height="43" rx="5" fill="#3DAB92" opacity="0.5"/>
+          <rect x="90" y="121" width="44" height="43" rx="5" fill="none" stroke="#3DAB92" stroke-width="1.5"/>
+          <text x="112" y="188" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#7A756A">Prev 13w</text>
+          <text x="112" y="117" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#3DAB92">4.3</text>
+          <!-- Last 13wks -->
+          <rect x="176" y="113" width="44" height="51" rx="5" fill="#1E7B6B" opacity="0.7"/>
+          <text x="198" y="188" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#7A756A">Last 13w</text>
+          <text x="198" y="109" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#1E7B6B">5.1</text>
+          <!-- Jan-Mar 26 -->
+          <rect x="262" y="102" width="44" height="62" rx="5" fill="url(#gBar)"/>
+          <text x="284" y="188" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#C8943A" font-weight="600">Jan–Mar</text>
+          <text x="284" y="98" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#C8943A">6.2</text>
+          <!-- trend arrow -->
+          <polyline points="46,122 112,120 198,111 284,100" fill="none" stroke="#C8943A" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+          <!-- baseline -->
+          <line x1="16" y1="166" x2="330" y2="166" stroke="#DDD8CC" stroke-width="1"/>
+        </svg>
+        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:8px;">ROS = units sold per store per week. Dashed = trend.</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">Tesco — Performance Summary</div>
+        <table>
+          <thead><tr><th>Period / Metric</th><th class="td-right">ROS</th><th class="td-center">vs Category Avg</th></tr></thead>
+          <tbody>
+            <tr><td>Category Average (benchmark)</td><td class="td-right">4.0</td><td class="td-center">—</td></tr>
+            <tr><td>Previous 13 Weeks</td><td class="td-right">4.3</td><td class="td-center td-pos">+8%</td></tr>
+            <tr><td>Last 13 Weeks</td><td class="td-right td-pos">5.1</td><td class="td-center td-pos">+28%</td></tr>
+            <tr class="highlight"><td>Jan–Mar 2026 (latest)</td><td class="td-right">6.2</td><td class="td-center">+55%</td></tr>
+            <tr><td>Top 10 Stores</td><td class="td-right td-pos">10+</td><td class="td-center td-pos">2.5×</td></tr>
+            <tr><td>Top 100 Stores</td><td class="td-right td-pos">6+</td><td class="td-center td-pos">1.5×</td></tr>
+            <tr class="total"><td>Plain Apple (top SKU)</td><td class="td-right td-pos">5.7</td><td class="td-center td-pos">+43%</td></tr>
+          </tbody>
+        </table>
+        <hr>
+        <div style="background:var(--teal-light);border-radius:8px;padding:12px 14px;margin-top:4px;">
+          <p style="font-size:0.82rem;color:var(--teal);font-weight:600;line-height:1.6;">ROS is growing every single period: 4.3 → 5.1 → 6.2. This is the trajectory Tesco buyers need to justify range expansion.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenue + ROI charts -->
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">Grocery Revenue — H2 vs H1</div>
+        <div class="chart-wrap"><canvas id="tescoChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">Retailer Ad Investment vs Revenue Return</div>
+        <div class="chart-wrap"><canvas id="tescoRoiChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="highlight-box">
+        <h3>Advertising ROI: 6.4×</h3>
+        <p>We invested £26,269 in Ocado, Tesco and Brakes co-op advertising in H1, generating £150k+ in incremental Grocery revenue — a <strong>6.4× return</strong>.</p>
+        <p>The velocity data now gives us the commercial proof to push for range expansion, more doors, and additional SKUs in the next ranging review.</p>
+        <ul>
+          <li>ROS growing every period — now 6.2 vs 4.0 avg</li>
+          <li>Top stores clearing 10+ units/store/week</li>
+          <li>Plain Apple the standout — 5.7 ROS</li>
+          <li>Retailer marketing confirmed as 6.4× ROI</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">Tesco — Next Steps</div>
+        <ul style="list-style:none;padding:0;font-size:0.87rem;color:var(--muted);">
+          <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
+            <span style="background:var(--teal);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">DONE</span>
+            <span>Incubator launch live — 350+ stores</span>
+          </li>
+          <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
+            <span style="background:var(--teal);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">DONE</span>
+            <span>ROS above category avg — 3 consecutive periods of growth</span>
+          </li>
+          <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
+            <span style="background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">NEXT</span>
+            <span>Range review — present velocity case for expanded SKU listing</span>
+          </li>
+          <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
+            <span style="background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">NEXT</span>
+            <span>Door count expansion using top-store velocity data</span>
+          </li>
+          <li style="display:flex;gap:10px;padding:11px 0;">
+            <span style="background:var(--border);color:var(--muted);font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">2027</span>
+            <span>Tesco Baby &amp; Toddler — review scheduled Feb 2027</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 4: PIPELINE
+═══════════════════════════════════════════════════════════ -->
+<div id="pipeline" class="page">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">04 · Growth Pipeline</span>
+      <h2>What's Coming Next</h2>
+      <p>Six high-quality opportunities across grocery, health retail, international and B2B — with clear decision dates on a single timeline through to early 2027.</p>
+    </div>
+
+    <!-- Timeline graphic -->
+    <div class="card" style="margin-bottom:24px;overflow:hidden;">
+      <div class="card-title" style="margin-bottom:20px;">Decision and Launch Timeline</div>
+      <div style="overflow-x:auto;padding-bottom:8px;">
+        <svg viewBox="0 0 860 220" style="width:100%;min-width:640px;" xmlns="http://www.w3.org/2000/svg">
+          <!-- spine -->
+          <line x1="50" y1="110" x2="830" y2="110" stroke="#DDD8CC" stroke-width="2"/>
+          <!-- arrow head -->
+          <polygon points="830,106 840,110 830,114" fill="#DDD8CC"/>
+
+          <!-- ── Month tick marks ── -->
+          <!-- May 26 = x70 (today) -->
+          <line x1="70" y1="104" x2="70" y2="116" stroke="#C0392B" stroke-width="2"/>
+          <text x="70" y="130" text-anchor="middle" font-family="DM Mono" font-size="8.5" fill="#C0392B" font-weight="700">TODAY</text>
+          <text x="70" y="140" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#C0392B">May '26</text>
+
+          <!-- Jun 26 = x200 -->
+          <line x1="200" y1="107" x2="200" y2="113" stroke="#CCC" stroke-width="1"/>
+          <text x="200" y="128" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#AAA">Jun '26</text>
+
+          <!-- Aug 26 = x360 -->
+          <line x1="360" y1="107" x2="360" y2="113" stroke="#CCC" stroke-width="1"/>
+          <text x="360" y="128" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#AAA">Aug '26</text>
+
+          <!-- Oct 26 = x510 -->
+          <line x1="510" y1="107" x2="510" y2="113" stroke="#CCC" stroke-width="1"/>
+          <text x="510" y="128" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#AAA">Oct '26</text>
+
+          <!-- Feb 27 = x700 -->
+          <line x1="700" y1="107" x2="700" y2="113" stroke="#CCC" stroke-width="1"/>
+          <text x="700" y="128" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#AAA">Feb '27</text>
+
+          <!-- ══ TOP ROW (above spine) ══ -->
+
+          <!-- CARREFOUR: Jun 26 decision -->
+          <line x1="200" y1="90" x2="200" y2="108" stroke="#1E7B6B" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="200" cy="110" r="11" fill="#1E7B6B"/>
+          <text x="200" y="114" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#fff" font-weight="700">CAR</text>
+          <text x="200" y="80" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#1E7B6B" font-weight="700">Carrefour UAE</text>
+          <text x="200" y="91" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">Rollout decision Jun '26</text>
+
+          <!-- BOOTS decision: Aug 26 — review range bar -->
+          <rect x="340" y="103" width="375" height="14" rx="5" fill="#C8943A" opacity="0.18"/>
+          <circle cx="360" cy="110" r="11" fill="#C8943A"/>
+          <text x="360" y="114" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#fff" font-weight="700">BOO</text>
+          <line x1="360" y1="90" x2="360" y2="101" stroke="#C8943A" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="360" y="80" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#C8943A" font-weight="700">Boots</text>
+          <text x="360" y="91" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">Decision Aug '26</text>
+          <!-- Boots review Feb 27 -->
+          <circle cx="700" cy="110" r="8" fill="#C8943A" opacity="0.55"/>
+          <text x="700" y="114" text-anchor="middle" font-family="DM Sans" font-size="7" fill="#fff" font-weight="700">BOO</text>
+
+          <!-- SAINSBURYS: Oct 26 launch -->
+          <line x1="510" y1="90" x2="510" y2="101" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="510" cy="110" r="11" fill="#8B5CF6"/>
+          <text x="510" y="114" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#fff" font-weight="700">SAI</text>
+          <text x="510" y="80" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#8B5CF6" font-weight="700">Sainsbury's</text>
+          <text x="510" y="91" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">Potential launch Oct '26</text>
+
+          <!-- TESCO B&T: Feb 27 -->
+          <line x1="700" y1="70" x2="700" y2="88" stroke="#2962B8" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="700" cy="62" r="12" fill="#2962B8"/>
+          <text x="700" y="66" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#fff" font-weight="700">TBT</text>
+          <text x="700" y="52" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#2962B8" font-weight="700">Tesco B&amp;T</text>
+          <text x="700" y="43" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">Review Feb '27</text>
+
+          <!-- ══ BOTTOM ROW (below spine) ══ -->
+
+          <!-- OFFICE PANTRY: active now -->
+          <line x1="120" y1="122" x2="120" y2="155" stroke="#3DAB92" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="120" cy="110" r="11" fill="#3DAB92"/>
+          <text x="120" y="114" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#fff" font-weight="700">OFC</text>
+          <text x="120" y="164" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#3DAB92" font-weight="700">Office Pantry</text>
+          <text x="120" y="175" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">In discussion</text>
+
+          <!-- EVERYONE ACTIVE: active / building -->
+          <line x1="290" y1="122" x2="290" y2="155" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="290" cy="110" r="11" fill="#059669"/>
+          <text x="290" y="114" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#fff" font-weight="700">EVA</text>
+          <text x="290" y="164" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#059669" font-weight="700">Everyone Active</text>
+          <text x="290" y="175" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="#7A756A">Leisure centres</text>
+
+          <!-- Legend -->
+          <rect x="50" y="192" width="10" height="10" rx="2" fill="#1E7B6B"/>
+          <text x="65" y="201" font-family="DM Sans" font-size="8" fill="#7A756A">International</text>
+          <rect x="155" y="192" width="10" height="10" rx="2" fill="#C8943A"/>
+          <text x="170" y="201" font-family="DM Sans" font-size="8" fill="#7A756A">Health Retail</text>
+          <rect x="255" y="192" width="10" height="10" rx="2" fill="#2962B8"/>
+          <text x="270" y="201" font-family="DM Sans" font-size="8" fill="#7A756A">Tesco Grocery</text>
+          <rect x="360" y="192" width="10" height="10" rx="2" fill="#8B5CF6"/>
+          <text x="375" y="201" font-family="DM Sans" font-size="8" fill="#7A756A">Major Grocery</text>
+          <rect x="465" y="192" width="10" height="10" rx="2" fill="#3DAB92"/>
+          <text x="480" y="201" font-family="DM Sans" font-size="8" fill="#7A756A">B2B / Leisure</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 6 pipeline cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:28px;">
+
+      <!-- Tesco Baby & Toddler -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid #2962B8;">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#2962B8;margin-bottom:6px;">Major UK Grocery</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Tesco Baby and Toddler</h4>
+            </div>
+            <span style="font-size:1.6rem;">🍼</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-green">Co-developing Range</span>
+            <span style="background:#EEF4FF;color:#2962B8;font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">Review Feb 2027</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">Currently co-developing a new added benefit range with the Tesco Baby and Toddler team. The buyer is keen to back health-led brands in the 3+ section. A formal ranging review is scheduled for February 2027.</p>
+        </div>
+        <div style="background:#EEF4FF;padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:#2962B8;font-weight:600;">Decision timeline: Feb 2027 ranging review</p>
+        </div>
+      </div>
+
+      <!-- Boots -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid var(--gold);">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Health and Beauty Retail</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Boots</h4>
+            </div>
+            <span style="font-size:1.6rem;">💊</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-gold">Samples Requested</span>
+            <span style="background:var(--gold-light);color:var(--gold);font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">Decision Aug 2026</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">Boots requested samples for a new health reset programme — a strong signal of intent. A ranging decision is expected August 2026 with a formal review in February 2027. Perfectly aligned with Scrapples' health-first positioning.</p>
+        </div>
+        <div style="background:var(--gold-light);padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:600;">Key dates: Decision Aug 2026, Review Feb 2027</p>
+        </div>
+      </div>
+
+      <!-- Carrefour UAE -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid var(--teal);">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">International Export · UAE</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Carrefour UAE - Wider Rollout</h4>
+            </div>
+            <span style="font-size:1.6rem;">🌍</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-green">Selected for Rollout</span>
+            <span style="background:var(--teal-light);color:var(--teal);font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">Decision Jun 2026</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">After a successful UAE launch, Scrapples has been selected with a small group of brands for rollout into more stores, placed by the checkout for high-visibility impulse purchase. June 2026 is the wider rollout decision point.</p>
+        </div>
+        <div style="background:var(--teal-light);padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--teal);font-weight:600;">Key date: June 2026 wider rollout decision</p>
+        </div>
+      </div>
+
+      <!-- Office Pantry -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid var(--teal-mid);">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:6px;">B2B / Workplace Snacking</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Office Pantry</h4>
+            </div>
+            <span style="font-size:1.6rem;">🏢</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-gold">B2B Discussions Active</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">Office Pantry supplies healthy snacks direct to workplace kitchens, a fast-growing B2B channel with high repeat purchase rates. Scrapples' health credentials and portion format are ideal for the workplace wellness trend.</p>
+        </div>
+        <div style="background:#F0FBF8;padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--teal-mid);font-weight:600;">New B2B channel, discussions underway</p>
+        </div>
+      </div>
+
+      <!-- Everyone Active -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid #059669;">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#059669;margin-bottom:6px;">Leisure / Active Lifestyle</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Everyone Active Leisure Centres</h4>
+            </div>
+            <span style="font-size:1.6rem;">🏊</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span style="background:#ECFDF5;color:#059669;font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">In Discussion</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">Capitalising on the GLL Better momentum, Everyone Active is the UK's second largest leisure operator. This opportunity extends the active and family leisure channel with a proven operator model we can replicate at scale.</p>
+        </div>
+        <div style="background:#ECFDF5;padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:#059669;font-weight:600;">Building on GLL Better leisure success</p>
+        </div>
+      </div>
+
+      <!-- Sainsbury's -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;border-top:4px solid #8B5CF6;">
+        <div style="padding:22px 22px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.7rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#8B5CF6;margin-bottom:6px;">Major UK Grocery</div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--ink);">Sainsbury's</h4>
+            </div>
+            <span style="font-size:1.6rem;">🛒</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span style="background:#F5F3FF;color:#8B5CF6;font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">Current Review</span>
+            <span style="background:#F5F3FF;color:#8B5CF6;font-size:0.67rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;">Launch Oct 2026</span>
+          </div>
+          <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;">Currently in an active review with Sainsbury's, with a potential launch targeted for October 2026. Previously progressed to product registration stage. Our strengthened Tesco velocity data and Ocado trend report recognition significantly improves our case.</p>
+        </div>
+        <div style="background:#F5F3FF;padding:12px 22px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:#8B5CF6;font-weight:600;">Potential launch October 2026</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary table -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;">Pipeline Summary</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Opportunity</th><th>Channel</th><th>Key Date</th><th class="td-center">Status</th><th>Strategic Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Carrefour UAE rollout</strong></td><td>International</td><td>Decision Jun 2026</td><td class="td-center"><span class="badge badge-green">Selected</span></td><td>Checkout placement, wider UAE distribution</td></tr>
+            <tr><td><strong>Boots</strong></td><td>Health and Beauty</td><td>Decision Aug 2026</td><td class="td-center"><span class="badge badge-gold">Samples Sent</span></td><td>Premium health channel, new audience</td></tr>
+            <tr><td><strong>Sainsbury's</strong></td><td>Major Grocery</td><td>Launch Oct 2026</td><td class="td-center"><span style="background:#F5F3FF;color:#8B5CF6;font-size:0.67rem;font-weight:600;padding:3px 9px;border-radius:20px;">In Review</span></td><td>Second top-4 grocer listing</td></tr>
+            <tr><td><strong>Office Pantry</strong></td><td>B2B Workplace</td><td>In discussion</td><td class="td-center"><span class="badge badge-gold">Early Stage</span></td><td>High-repeat B2B channel</td></tr>
+            <tr><td><strong>Everyone Active</strong></td><td>Leisure Centres</td><td>In discussion</td><td class="td-center"><span class="badge badge-gold">Building</span></td><td>Extends GLL leisure model</td></tr>
+            <tr><td><strong>Tesco Baby and Toddler</strong></td><td>Major Grocery</td><td>Review Feb 2027</td><td class="td-center"><span class="badge badge-green">Co-developing</span></td><td>Expands Tesco into new category</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 5: STRATEGY
+═══════════════════════════════════════════════════════════ -->
+<div id="strategy" class="page">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">05 · Growth Strategy</span>
+      <h2>The Path to Profitability</h2>
+      <p>Four strategic pillars define our H2 FY2026 priorities. The business is closer to breakeven than at any point in its history — these pillars define how we get there.</p>
+    </div>
+
+    <!-- Breakeven callout -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:28px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:220px;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Distance to Breakeven</div>
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--teal);line-height:1;">£10,818</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:4px;">operating loss remaining in H1 — our lowest ever</div>
+      </div>
+      <div style="flex:2;min-width:260px;">
+        <div style="margin-bottom:10px;">
+          <div class="progress-meta"><span style="font-size:0.82rem;font-weight:600;">Loss Reduction Journey</span><span style="font-size:0.82rem;font-family:'DM Mono',monospace;color:var(--muted);">H2: -£35k → H1: -£11k</span></div>
+          <div class="progress-bar" style="height:10px;">
+            <div class="progress-fill" style="width:69%;background:linear-gradient(90deg,var(--teal-mid),var(--teal));"></div>
+          </div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">69% of the gap closed in one half</div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">At current trajectory, operating breakeven is achievable in H2 FY2026 with continued Grocery revenue growth and controlled admin cost scaling.</p>
+      </div>
+    </div>
+
+    <!-- Strategy pillars -->
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <span class="pillar-icon">🏪</span>
+        <h4>Protect & Grow Grocery Distribution</h4>
+        <p>Maintain and increase investment in retailer co-op advertising. The 6.4× ROI in H1 demonstrates this is the highest-return use of marketing budget. Prioritise Tesco range expansion and doors growth as the #1 commercial priority.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <span class="pillar-icon">🌍</span>
+        <h4>Scale Export — Capitalise on 150% Growth</h4>
+        <p>Export tripled in H1. UAE (Carrefour) confirms international demand. Develop a dedicated export growth strategy: convert Spinneys and Choitrams discussions, explore European distribution, and build a repeatable model for new market entry.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <span class="pillar-icon">🍽</span>
+        <h4>Food Service Recovery Plan</h4>
+        <p>Commission a root-cause analysis of the £18,851 Food Service decline. Is this contract expiry, seasonal softness, or lost accounts? The Serco Healthcare opportunity (50 sites, final review stage) represents a material recovery path if converted.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <span class="pillar-icon">💰</span>
+        <h4>Fundraising Round — H2 2025</h4>
+        <p>A larger fundraising round is being kicked off in H2. Investment will fund grocery rollout, export expansion, key hires, and new product development. The business now has its strongest ever proof points to present to investors.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">H2 FY2026 Priorities</div>
+        <table>
+          <thead><tr><th>Priority</th><th class="td-center">Owner</th><th class="td-center">Status</th></tr></thead>
+          <tbody>
+            <tr><td>Tesco range review — expand SKUs & doors</td><td class="td-center">Commercial</td><td class="td-center"><span class="badge badge-green">In Progress</span></td></tr>
+            <tr><td>Carrefour UAE launch execution</td><td class="td-center">Export</td><td class="td-center"><span class="badge badge-green">Confirmed</span></td></tr>
+            <tr><td>Sainsbury's re-engagement</td><td class="td-center">Commercial</td><td class="td-center"><span class="badge badge-gold">Pending</span></td></tr>
+            <tr><td>Serco Healthcare — close deal</td><td class="td-center">Foodservice</td><td class="td-center"><span class="badge badge-green">Final Stage</span></td></tr>
+            <tr><td>Food Service recovery plan</td><td class="td-center">Operations</td><td class="td-center"><span class="badge badge-red">Action Needed</span></td></tr>
+            <tr><td>Fundraising round launch</td><td class="td-center">Finance</td><td class="td-center"><span class="badge badge-gold">H2 Start</span></td></tr>
+            <tr><td>COGS & supply chain review</td><td class="td-center">Operations</td><td class="td-center"><span class="badge badge-gold">Underway</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <h3>The Investment Ask</h3>
+        <p>As we enter H2 FY2026, we are opening our next fundraising round. This is the right moment — the business has its strongest-ever commercial proof points.</p>
+        <ul>
+          <li>Fund Tesco & Grocery rollout at scale</li>
+          <li>Accelerate Export market expansion</li>
+          <li>Hire key specialists in commercial & ops</li>
+          <li>Support new product development</li>
+          <li>Maintain marketing momentum</li>
+        </ul>
+        <p style="margin-top:20px;font-size:0.88rem;">Introductions to investors aligned with our health-led mission are warmly welcomed.</p>
+        <p style="margin-top:8px;font-size:0.88rem;"><strong>Contact:</strong> <a href="mailto:ben@sparesnacks.com" style="color:#fff;text-decoration:underline;">ben@sparesnacks.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>© 2026 Spare Snacks Ltd · All rights reserved</p>
+  <p style="margin-top:6px;">This document contains confidential information for investors only. Not for external distribution.</p>
+  <p style="margin-top:6px;"><a href="mailto:ben@sparesnacks.com">ben@sparesnacks.com</a></p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ── NAVIGATION ───────────────────────────────────────────
+  const navLinks = document.querySelectorAll('nav a');
+  const pages = document.querySelectorAll('.page');
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      const target = link.dataset.page;
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ── CHART DEFAULTS ───────────────────────────────────────
+  Chart.defaults.font.family = 'DM Sans';
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = '#7A756A';
+  const TEAL = '#1E7B6B';
+  const TEAL_MID = '#3DAB92';
+  const TEAL_LT = 'rgba(30,123,107,0.15)';
+  const GOLD = '#C8943A';
+  const RED = '#C0392B';
+  const RED_LT = 'rgba(192,57,43,0.15)';
+  const BLUE = '#2962B8';
+  const BORDER = '#DDD8CC';
+
+  // ── REVENUE CHART ────────────────────────────────────────
+  new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+      labels: ['H2 Apr–Sep 25', 'H1 Oct–Mar 26'],
+      datasets: [
+        { label: 'Revenue', data: [185519, 329190], backgroundColor: [TEAL_LT, TEAL], borderColor: [TEAL, TEAL], borderWidth: 2, borderRadius: 6 },
+        { label: 'Gross Profit', data: [59330, 100916], backgroundColor: ['rgba(200,148,58,0.2)', GOLD], borderColor: [GOLD, GOLD], borderWidth: 2, borderRadius: 6 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── WATERFALL CHART ──────────────────────────────────────
+  new Chart(document.getElementById('waterfallChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Revenue', 'Cost of Sales', 'Gross Profit', 'Admin Costs', 'Op. Loss'],
+      datasets: [{
+        label: 'H1 FY2026',
+        data: [329190, -228275, 100916, -111734, -10818],
+        backgroundColor: [TEAL, RED_LT, GOLD, RED_LT, 'rgba(192,57,43,0.8)'],
+        borderColor: [TEAL, RED, GOLD, RED, RED],
+        borderWidth: 2,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── CHANNEL CHARTS ───────────────────────────────────────
+  const channelCtx = document.getElementById('channelChart');
+  let channelChart;
+
+  const channelConfigs = {
+    channels: {
+      type: 'bar',
+      data: {
+        labels: ['Grocery', 'Food Service', 'Amazon', 'DTC Online', 'Export', 'Hotels', 'OOH', 'Independents'],
+        datasets: [
+          { label: 'H2 Apr–Sep 25', data: [99060, 44373, 21563, 9451, 6576, 2304, 1728, 622], backgroundColor: TEAL_LT, borderColor: TEAL, borderWidth: 2, borderRadius: 4 },
+          { label: 'H1 Oct–Mar 26', data: [249889, 25522, 20100, 12924, 16464, 1620, 797, 1501], backgroundColor: TEAL, borderColor: TEAL, borderWidth: 2, borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } },
+        scales: { y: { beginAtZero: true, grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } }, x: { grid: { display: false } } }
+      }
+    },
+    mix: {
+      type: 'doughnut',
+      data: {
+        labels: ['Grocery', 'Food Service', 'Amazon', 'DTC Online', 'Export', 'Hotels', 'OOH', 'Others'],
+        datasets: [{
+          data: [249889, 25522, 20100, 12924, 16464, 1620, 797, 1874],
+          backgroundColor: [TEAL, GOLD, BLUE, TEAL_MID, '#8B5CF6', '#F59E0B', RED, '#94A3B8'],
+          borderWidth: 2, borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'right' }, tooltip: { callbacks: { label: ctx => ctx.label + ': £' + ctx.parsed.toLocaleString() + ' (' + ((ctx.parsed / 329190)*100).toFixed(1) + '%)' } } }
+      }
+    },
+    trend: {
+      type: 'line',
+      data: {
+        labels: ['H2 Apr–Sep 25', 'H1 Oct–Mar 26'],
+        datasets: [
+          { label: 'Grocery', data: [99060, 249889], borderColor: TEAL, backgroundColor: TEAL_LT, fill: true, tension: 0.3, borderWidth: 3 },
+          { label: 'Export', data: [6576, 16464], borderColor: '#8B5CF6', backgroundColor: 'rgba(139,92,246,0.1)', fill: true, tension: 0.3, borderWidth: 2 },
+          { label: 'DTC Online', data: [9451, 12924], borderColor: GOLD, backgroundColor: 'rgba(200,148,58,0.1)', fill: true, tension: 0.3, borderWidth: 2 },
+          { label: 'Food Service', data: [44373, 25522], borderColor: RED, backgroundColor: RED_LT, fill: true, tension: 0.3, borderWidth: 2 },
+          { label: 'Amazon', data: [21563, 20100], borderColor: BLUE, backgroundColor: 'rgba(41,98,184,0.1)', fill: true, tension: 0.3, borderWidth: 2 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'right' } },
+        scales: { y: { beginAtZero: true, grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } }, x: { grid: { display: false } } }
+      }
+    }
+  };
+
+  function renderChannelChart(type) {
+    if (channelChart) channelChart.destroy();
+    const cfg = channelConfigs[type];
+    channelChart = new Chart(channelCtx, { type: cfg.type, data: cfg.data, options: cfg.options });
+  }
+  renderChannelChart('channels');
+
+  document.getElementById('growthTabs').addEventListener('click', e => {
+    if (!e.target.classList.contains('tab-btn')) return;
+    document.querySelectorAll('#growthTabs .tab-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderChannelChart(e.target.dataset.chart);
+  });
+
+  // ── ROS CHART ────────────────────────────────────────────
+  new Chart(document.getElementById('rosChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Category Avg', 'Prev 13 Wks', 'Last 13 Wks', 'Jan–Mar 2026'],
+      datasets: [{
+        label: 'Rate of Sale (ROS)',
+        data: [4.0, 4.3, 5.1, 6.2],
+        backgroundColor: ['#DDD8CC', 'rgba(61,171,146,0.5)', TEAL, GOLD],
+        borderColor: ['#AAA', TEAL_MID, TEAL, GOLD],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        annotation: {},
+        tooltip: { callbacks: { label: ctx => 'ROS: ' + ctx.parsed.y } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true, max: 8,
+          grid: { color: '#f0ece4' },
+          ticks: { stepSize: 2 }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── TESCO CHARTS ─────────────────────────────────────────
+  new Chart(document.getElementById('tescoChart'), {
+    type: 'bar',
+    data: {
+      labels: ['H2 Apr–Sep 25', 'H1 Oct–Mar 26'],
+      datasets: [{
+        label: 'Grocery Revenue',
+        data: [99060, 249889],
+        backgroundColor: ['rgba(41,98,184,0.25)', 'rgba(41,98,184,0.85)'],
+        borderColor: [BLUE, BLUE], borderWidth: 2, borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '£' + ctx.parsed.y.toLocaleString() } } },
+      scales: { y: { beginAtZero: true, grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } }, x: { grid: { display: false } } }
+    }
+  });
+
+  new Chart(document.getElementById('tescoRoiChart'), {
+    type: 'bar',
+    data: {
+      labels: ['H2', 'H1'],
+      datasets: [
+        { label: 'Ad Spend', data: [2650, 26269], backgroundColor: ['rgba(200,148,58,0.3)', GOLD], borderColor: GOLD, borderWidth: 2, borderRadius: 6 },
+        { label: 'Grocery Revenue', data: [99060, 249889], backgroundColor: ['rgba(30,123,107,0.3)', TEAL], borderColor: TEAL, borderWidth: 2, borderRadius: 6 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { beginAtZero: true, grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } }, x: { grid: { display: false } } }
+    }
+  });
+
+  // ── PIPELINE cards now rendered as static HTML ───────────
+
+});
+</script>
+</body>
+</html>
