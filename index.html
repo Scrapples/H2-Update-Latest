@@ -730,10 +730,28 @@
           <canvas id="revenueChart"></canvas>
         </div>
       </div>
-      <div class="card fade-up">
-        <div class="card-title">P&L Waterfall — H1 FY2026</div>
-        <div class="chart-wrap">
-          <canvas id="waterfallChart"></canvas>
+      <div class="card fade-up" style="display:flex;flex-direction:column;gap:0;">
+        <div class="card-title" style="margin-bottom:4px;">Physical Unit Sales Growth</div>
+        <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;">Units sold — half-on-half and year-on-year</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div style="font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:8px;">H1 vs H2 — Half-on-Half</div>
+            <div class="chart-wrap"><canvas id="unitsHoHChart"></canvas></div>
+          </div>
+          <div>
+            <div style="font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:8px;">H1 25/26 vs H1 24/25 — Year-on-Year</div>
+            <div class="chart-wrap"><canvas id="unitsYoYChart"></canvas></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;">
+          <div style="background:var(--teal-light);border-radius:8px;padding:10px 14px;text-align:center;">
+            <div style="font-family:var(--font-title);font-size:1.5rem;font-weight:700;color:var(--teal);">+89.2%</div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-top:2px;">+381,505 units vs H2</div>
+          </div>
+          <div style="background:var(--teal-light);border-radius:8px;padding:10px 14px;text-align:center;">
+            <div style="font-family:var(--font-title);font-size:1.5rem;font-weight:700;color:var(--teal);">+219.3%</div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-top:2px;">+555,893 units vs H1 24/25</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1082,7 +1100,7 @@
           </li>
           <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
             <span style="background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">NEXT</span>
-            <span>Range review — present velocity case for expanded SKU listing</span>
+            <span>Present enhanced promotional plan for Back to School (Q4) once raise is complete</span>
           </li>
           <li style="display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
             <span style="background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;">NEXT</span>
@@ -1516,24 +1534,63 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── WATERFALL CHART ──────────────────────────────────────
-  new Chart(document.getElementById('waterfallChart'), {
+  // ── UNIT SALES — Half-on-Half ───────────────────────────
+  new Chart(document.getElementById('unitsHoHChart'), {
     type: 'bar',
     data: {
-      labels: ['Revenue', 'Cost of Sales', 'Gross Profit', 'Admin Costs', 'Op. Loss'],
+      labels: ['H2 Apr–Sep 25', 'H1 Oct–Mar 26'],
       datasets: [{
-        label: 'H1 FY2026',
-        data: [329190, -228275, 100916, -111734, -10818],
-        backgroundColor: [TEAL, RED_LT, GOLD, RED_LT, 'rgba(192,57,43,0.8)'],
-        borderColor: [TEAL, RED, GOLD, RED, RED],
+        label: 'Units Sold',
+        data: [427875, 809380],
+        backgroundColor: [TEAL_LT, TEAL],
+        borderColor: [TEAL, TEAL],
         borderWidth: 2,
-        borderRadius: 6
+        borderRadius: 8
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' units' } }
+      },
       scales: {
-        y: { grid: { color: '#f0ece4' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } },
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f0ece4' },
+          ticks: { callback: v => (v/1000).toFixed(0) + 'k' }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── UNIT SALES — Year-on-Year ────────────────────────────
+  new Chart(document.getElementById('unitsYoYChart'), {
+    type: 'bar',
+    data: {
+      labels: ['H1 Oct–Mar 24/25', 'H1 Oct–Mar 25/26'],
+      datasets: [{
+        label: 'Units Sold',
+        data: [253487, 809380],
+        backgroundColor: [TEAL_LT, TEAL],
+        borderColor: [TEAL, TEAL],
+        borderWidth: 2,
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' units' } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f0ece4' },
+          ticks: { callback: v => (v/1000).toFixed(0) + 'k' }
+        },
         x: { grid: { display: false } }
       }
     }
