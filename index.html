@@ -764,6 +764,22 @@
       </div>
     </div>
 
+    <!-- H1 v H1 Revenue Callout -->
+    <div class="card fade-up" style="margin-bottom:20px;">
+      <div class="card-title" style="margin-bottom:4px;">H1 vs H1 Revenue — Year-on-Year</div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;">Total turnover H1 24/25 vs H1 25/26</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:flex-end;">
+        <div class="chart-wrap"><canvas id="h1h1Chart"></canvas></div>
+        <div style="display:flex;flex-direction:column;gap:12px;justify-content:center;">
+          <div style="background:var(--teal-light);border-radius:8px;padding:12px 16px;">
+            <div style="font-family:var(--font-title);font-size:1.6rem;font-weight:700;color:var(--teal);">+167%</div>
+            <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Total revenue growth YoY</div>
+          </div>
+          <p style="font-size:0.85rem;color:var(--ink);line-height:1.7;margin:0;">Growth was largely driven by <strong>Grocery</strong>, including Tesco launch and strong Ocado growth.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- P&L Summary Table -->
     <div class="card fade-up" style="margin-bottom:20px;">
       <div class="card-title" style="margin-bottom:16px;">P&L Summary — H2 vs H1 Comparison</div>
@@ -1093,7 +1109,7 @@
 
     <div class="grid-2">
       <div class="highlight-box">
-        <h3>Advertising ROI: 6.4×</h3>
+        <h3>Promo + Ad ROI: 6.4×</h3>
         <p>Every £1 spent on promo and search investment (Ocado, Tesco, Brakes) returned over £6 in Grocery revenue — a <strong>6.4× ROI on £26,269 invested</strong>.</p>
         <p>It's worth noting: the majority of this ad spend and Grocery growth is driven by our new Tesco listing. As the listing matures and we add further retail partners, the ROI base broadens and becomes less concentrated.</p>
         <ul>
@@ -1532,6 +1548,37 @@ document.addEventListener('DOMContentLoaded', function() {
   const BORDER = '#DDD8CC';
 
   // ── REVENUE CHART ────────────────────────────────────────
+  // ── H1 v H1 REVENUE CHART ────────────────────────────────
+  new Chart(document.getElementById('h1h1Chart'), {
+    type: 'bar',
+    data: {
+      labels: ['H1 24/25', 'H1 25/26'],
+      datasets: [{
+        label: 'Revenue',
+        data: [123000, 329190],
+        backgroundColor: [TEAL_LT, TEAL],
+        borderColor: [TEAL, TEAL],
+        borderWidth: 2,
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => '£' + (ctx.parsed.y/1000).toFixed(0) + 'k' } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f0ece4' },
+          ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
   new Chart(document.getElementById('revenueChart'), {
     type: 'bar',
     data: {
