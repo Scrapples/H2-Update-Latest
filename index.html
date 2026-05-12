@@ -543,15 +543,19 @@
   const EMAILJS_TEMPLATE_ID = 'template_4lv8cir';  // e.g. 'template_xyz789'
   const EMAILJS_PUBLIC_KEY  = 'Hgii8PqVNdcAjK61c';   // e.g. 'AbCdEfGhIjKlMnOp'
 
+  // Initialise EmailJS once
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
   function sendLoginAlert() {
-    if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return; // not configured yet
-    emailjs.init(EMAILJS_PUBLIC_KEY);
     const now = new Date();
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      to_email:   'ben@sparesnacks.com',
-      login_time: now.toLocaleString('en-GB', { timeZone: 'Europe/London' }),
-      user_agent: navigator.userAgent.substring(0, 120),
-    });
+      to_email:      'ben@sparesnacks.com',
+      reply_to:      'ben@sparesnacks.com',
+      request_name:  'N/A — Login',
+      request_email: 'N/A',
+      login_time:    now.toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+      user_agent:    navigator.userAgent.substring(0, 120),
+    }).catch(err => console.error('Login alert failed:', err));
   }
 
   function sendAccessRequest() {
@@ -563,26 +567,20 @@
     if (!email || !email.includes('@')) { err.textContent = 'Please enter a valid email.'; return; }
     err.textContent = '';
 
-    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        to_email:      'ben@sparesnacks.com',
-        reply_to:      email,
-        request_name:  name,
-        request_email: email,
-        login_time:    new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
-        user_agent:    'Access Request',
-      });
-    } else {
-      // EmailJS not configured — fall back to mailto
-      window.location.href = 'mailto:ben@sparesnacks.com'
-        + '?subject=Dashboard%20Access%20Request'
-        + '&body=Name%3A%20' + encodeURIComponent(name)
-        + '%0AEmail%3A%20' + encodeURIComponent(email);
-    }
-
-    document.getElementById('accessRequestForm').style.display = 'none';
-    document.getElementById('accessRequestSent').style.display = 'block';
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:      'ben@sparesnacks.com',
+      reply_to:      email,
+      request_name:  name,
+      request_email: email,
+      login_time:    new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+      user_agent:    'Access Request',
+    }).then(() => {
+      document.getElementById('accessRequestForm').style.display = 'none';
+      document.getElementById('accessRequestSent').style.display = 'block';
+    }).catch(err => {
+      document.getElementById('requestError').textContent = 'Failed to send — please email ben@sparesnacks.com directly.';
+      console.error('Access request failed:', err);
+    });
   }
 
   function checkPassword() {
