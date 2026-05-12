@@ -510,9 +510,22 @@
     onmouseover="this.style.background='#165f52'"
     onmouseout="this.style.background='var(--teal)'"
     >Access Dashboard</button>
-    <div style="margin-top:20px;font-size:0.72rem;color:var(--muted);line-height:1.8;">
-      Don't have a password?
-      <a href="mailto:ben@sparesnacks.com?subject=Investor%20Dashboard%20Access%20Request&body=Hi%20Ben%2C%0A%0AI%27d%20like%20to%20request%20access%20to%20the%20Spare%20Snacks%20investor%20dashboard.%0A%0AMany%20thanks%2C" style="color:var(--teal);font-weight:600;">Request access</a>
+    <div style="margin-top:20px;">
+      <div id="accessRequestForm">
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;">Don't have a password? Request access below.</div>
+        <input id="requestName" type="text" placeholder="Your name"
+          style="width:100%;box-sizing:border-box;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:0.85rem;color:var(--ink);background:var(--bg);outline:none;margin-bottom:8px;"/>
+        <input id="requestEmail" type="email" placeholder="Your email address"
+          style="width:100%;box-sizing:border-box;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:0.85rem;color:var(--ink);background:var(--bg);outline:none;margin-bottom:8px;"/>
+        <div id="requestError" style="font-size:0.75rem;color:var(--red);min-height:16px;margin-bottom:6px;"></div>
+        <button onclick="sendAccessRequest()" style="width:100%;padding:11px;border:1.5px solid var(--teal);border-radius:8px;background:transparent;color:var(--teal);font-family:var(--font-body);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;"
+          onmouseover="this.style.background='var(--teal-light)'"
+          onmouseout="this.style.background='transparent'"
+        >Request Access</button>
+      </div>
+      <div id="accessRequestSent" style="display:none;font-size:0.78rem;color:var(--teal);text-align:center;padding:10px;background:var(--teal-light);border-radius:8px;margin-top:4px;">
+        ✓ Request sent — Ben will be in touch shortly.
+      </div>
     </div>
   </div>
 </div>
@@ -526,9 +539,9 @@
   // 2. Create a service (Gmail works) and note your Service ID
   // 3. Create an email template and note your Template ID
   // 4. Get your Public Key from Account > API Keys
-  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
-  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+  const EMAILJS_SERVICE_ID  = 'service_jmi5236';   // e.g. 'service_abc123'
+  const EMAILJS_TEMPLATE_ID = 'template_4lv8cir';  // e.g. 'template_xyz789'
+  const EMAILJS_PUBLIC_KEY  = 'Hgii8PqVNdcAjK61c';   // e.g. 'AbCdEfGhIjKlMnOp'
 
   function sendLoginAlert() {
     if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return; // not configured yet
@@ -539,6 +552,37 @@
       login_time: now.toLocaleString('en-GB', { timeZone: 'Europe/London' }),
       user_agent: navigator.userAgent.substring(0, 120),
     });
+  }
+
+  function sendAccessRequest() {
+    const name  = document.getElementById('requestName').value.trim();
+    const email = document.getElementById('requestEmail').value.trim();
+    const err   = document.getElementById('requestError');
+
+    if (!name)  { err.textContent = 'Please enter your name.'; return; }
+    if (!email || !email.includes('@')) { err.textContent = 'Please enter a valid email.'; return; }
+    err.textContent = '';
+
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email:      'ben@sparesnacks.com',
+        reply_to:      email,
+        request_name:  name,
+        request_email: email,
+        login_time:    new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+        user_agent:    'Access Request',
+      });
+    } else {
+      // EmailJS not configured — fall back to mailto
+      window.location.href = 'mailto:ben@sparesnacks.com'
+        + '?subject=Dashboard%20Access%20Request'
+        + '&body=Name%3A%20' + encodeURIComponent(name)
+        + '%0AEmail%3A%20' + encodeURIComponent(email);
+    }
+
+    document.getElementById('accessRequestForm').style.display = 'none';
+    document.getElementById('accessRequestSent').style.display = 'block';
   }
 
   function checkPassword() {
