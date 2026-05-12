@@ -550,12 +550,15 @@
 
   function sendLoginAlert() {
     const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    const t = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    const timeStr = pad(t.getDate()) + ' ' + t.toLocaleString('en-GB',{month:'short'}) + ' ' + t.getFullYear() + ', ' + pad(t.getHours()) + ':' + pad(t.getMinutes());
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email:      'ben@sparesnacks.com',
       reply_to:      'ben@sparesnacks.com',
-      request_name:  'N/A — Login',
-      request_email: 'N/A',
-      login_time:    now.toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+      request_name:  '— Login alert (no request)',
+      request_email: '—',
+      login_time:    timeStr,
       user_agent:    navigator.userAgent.substring(0, 120),
     }).catch(err => console.error('Login alert failed:', err));
   }
@@ -574,7 +577,7 @@
       reply_to:      email,
       request_name:  name,
       request_email: email,
-      login_time:    new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+      login_time:    (() => { const pad = n => String(n).padStart(2,'0'); const t = new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/London'})); return pad(t.getDate())+' '+t.toLocaleString('en-GB',{month:'short'})+' '+t.getFullYear()+', '+pad(t.getHours())+':'+pad(t.getMinutes()); })(),
       user_agent:    'Access Request',
     }).then(() => {
       document.getElementById('accessRequestForm').style.display = 'none';
