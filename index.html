@@ -532,8 +532,8 @@
 
 <script>
   // ── Password config ──────────────────────────────────────
-  const PASSWORD_INTERNAL = 'Scrapples2026!';
-  const PASSWORD_EXTERNAL = 'Scrapples2026ext!';
+  const PASSWORD_INTERNAL = 'Scrapples_int2026!';
+  const PASSWORD_EXTERNAL = 'Scrapples2026!';
 
   // ── EmailJS config — fill in after creating free account ─
   // 1. Sign up at https://www.emailjs.com (free tier: 200 emails/month)
@@ -589,15 +589,28 @@
     });
   }
 
+  function setMode(isInternal) {
+    const challengesTab = document.querySelector('[data-page="challenges"]');
+    if (challengesTab) {
+      challengesTab.style.display = isInternal ? '' : 'none';
+    }
+    // hide all internal-only page sections in external mode
+    document.querySelectorAll('.internal-only').forEach(el => {
+      el.style.display = isInternal ? '' : 'none';
+    });
+  }
+
   function checkPassword() {
     const input = document.getElementById('pwInput').value;
     if (input === PASSWORD_INTERNAL) {
       document.body.classList.remove('external-mode');
+      setMode(true);
       sendLoginAlert('Internal');
       document.getElementById('passwordGate').style.display = 'none';
       document.getElementById('pwInput').value = '';
     } else if (input === PASSWORD_EXTERNAL) {
       document.body.classList.add('external-mode');
+      setMode(false);
       sendLoginAlert('External');
       document.getElementById('passwordGate').style.display = 'none';
       document.getElementById('pwInput').value = '';
@@ -619,10 +632,11 @@
     <nav>
       <a class="active" data-page="highlights">Highlights</a>
       <a data-page="financial">Financials</a>
-      <a data-page="growth">Growth</a>
+      <a data-page="growth">Sales Growth</a>
       <a data-page="tesco">Tesco</a>
       <a data-page="pipeline">Pipeline</a>
-      <a data-page="strategy">Strategy</a>
+      <a data-page="strategy">Growth Strategy</a>
+      <a data-page="challenges" class="internal-only" style="display:none;">Challenges</a>
     </nav>
   </div>
 </header>
@@ -1673,6 +1687,45 @@
         <p style="margin-top:16px;font-size:0.88rem;">Introductions to investors aligned with our health-led mission are warmly welcomed.</p>
         <p style="margin-top:8px;font-size:0.88rem;"><strong>Contact:</strong> <a href="mailto:ben@sparesnacks.com" style="color:#fff;text-decoration:underline;">ben@sparesnacks.com</a></p>
       </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="challenges" class="page internal-only" style="display:none;">
+  <div style="max-width:860px;margin:0 auto;padding:32px 20px;">
+
+    <div style="margin-bottom:32px;">
+      <span class="section-label">06 · Internal — Challenges</span>
+      <h2 style="font-family:var(--font-title);font-size:2.2rem;margin-top:8px;margin-bottom:6px;">Challenges &amp; Headwinds</h2>
+      <p style="color:var(--muted);font-size:0.9rem;">Internal view — not for external distribution</p>
+    </div>
+
+    <!-- Commercial Reality -->
+    <div class="card fade-up" style="margin-bottom:20px;border-left:4px solid var(--gold);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="width:38px;height:38px;background:var(--gold-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🌍</div>
+        <div class="card-title" style="margin:0;">Commercial Reality</div>
+      </div>
+      <p style="font-size:0.9rem;color:var(--ink);line-height:1.8;">Global instability has had a direct impact on our transport costs, and we anticipate further headwinds while the situation in the Middle East remains uncertain. We are well-versed in navigating these pressure points — and are committed to protecting our supply chain as we scale. Increased volume forecasts will also help offset anticipated cost increases.</p>
+    </div>
+
+    <!-- Fundraise -->
+    <div class="card fade-up" style="margin-bottom:20px;border-left:4px solid var(--gold);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="width:38px;height:38px;background:var(--gold-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">💰</div>
+        <div class="card-title" style="margin:0;">Fundraise</div>
+      </div>
+      <p style="font-size:0.9rem;color:var(--ink);line-height:1.8;">The broader macro environment has slowed our fundraising momentum, reflecting general market sentiment. Our strategy of focusing on Tesco growth to unlock major new listings has proved successful — we now need to secure fresh capital to execute our growth plan, deliver a strong Q4 launch, and make the most of what will be our biggest and most exciting Back to School period to date.</p>
+    </div>
+
+    <!-- Team & Resource -->
+    <div class="card fade-up" style="margin-bottom:20px;border-left:4px solid var(--gold);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="width:38px;height:38px;background:var(--gold-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">👥</div>
+        <div class="card-title" style="margin:0;">Team &amp; Resource</div>
+      </div>
+      <p style="font-size:0.9rem;color:var(--ink);line-height:1.8;">We are operating at full stretch as we maintain momentum through a rapid growth phase. Strengthening the team remains a key priority — we are actively identifying the right people and structures to support our continued growth trajectory.</p>
     </div>
 
   </div>
